@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import TopNews from "../TopNews";
 import Search from "../Search";
-import { getStories } from "../../actions/actions";
+import { getStories, getDescription } from "../../actions/actions";
 import MapWrapper from "./MapWrapper";
 import MyHeader from "./MyHeader";
 
@@ -10,8 +10,8 @@ export class MainPage extends React.PureComponent {
   state = {};
 
   componentDidMount() {
-    console.log("comp mount");
     this.props.getStories();
+    // this.props.getDescription(this.props.stories, 5);
   }
 
   render() {
@@ -31,4 +31,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getStories })(MainPage);
+export default connect(mapStateToProps, { getStories, getDescription })(
+  MainPage
+);
