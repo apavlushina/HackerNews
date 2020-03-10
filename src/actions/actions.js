@@ -15,8 +15,6 @@ export const getStories = () => dispatch => {
     .then(response => {
       const action = allStories(response.body);
       dispatch(action);
-      const nextAction = getDescription(response.body);
-      dispatch(nextAction);
     })
     .catch(console.error);
 };
@@ -32,6 +30,7 @@ function detailedStories(payload) {
 
 export const getDescription = (arrayOfStories, counter) => dispatch => {
   for (let i = 0; i <= counter; i++) {
+    console.log("fetch 2");
     console.log("request url", `${baseUrl}item/${arrayOfStories[i]}.json`);
     request(`${baseUrl}item/${i}.json`)
       .then(response => {

@@ -9,12 +9,14 @@ import MyHeader from "./MyHeader";
 export class MainPage extends React.PureComponent {
   state = {};
 
-  componentDidMount() {
-    this.props.getStories();
-    // this.props.getDescription(this.props.stories, 5);
+  async componentDidMount() {
+    await this.props.getStories();
+    console.log("topStories", this.props.stories);
+    this.props.getDescription(this.props.stories, 5);
   }
 
   render() {
+    console.log("topStories2", this.props.stories);
     return (
       <MapWrapper>
         <MyHeader>HackerNews</MyHeader>
@@ -27,7 +29,8 @@ export class MainPage extends React.PureComponent {
 
 const mapStateToProps = state => {
   return {
-    stories: state.stories
+    stories: state.stories,
+    descriptions: state.description
   };
 };
 
