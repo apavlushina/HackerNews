@@ -1,4 +1,5 @@
 import request from "superagent";
+import stories from "../reducers/stories";
 
 export const ALL_STORIES = "ALL_STORIES";
 
@@ -28,11 +29,14 @@ function detailedStories(payload) {
   };
 }
 
-export const getDescription = (arrayOfStories, counter) => dispatch => {
-  for (let i = 0; i <= counter; i++) {
-    console.log("fetch 2");
-    console.log("request url", `${baseUrl}item/${arrayOfStories[i]}.json`);
-    request(`${baseUrl}item/${i}.json`)
+export const getDescription = (
+  arrayOfStories,
+  startCounter,
+  finishCounter
+) => dispatch => {
+  console.log("props in action", arrayOfStories);
+  for (let i = startCounter; i <= finishCounter; i++) {
+    request(`${baseUrl}item/${arrayOfStories[i]}.json`)
       .then(response => {
         const action = detailedStories(response.body);
         dispatch(action);
