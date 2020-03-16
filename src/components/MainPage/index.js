@@ -10,25 +10,25 @@ export class MainPage extends React.PureComponent {
   state = {
     counter: 20,
     stories: [],
-    description: []
+    descriptions: []
   };
 
   async componentDidMount() {
     await this.props.getStories();
-    console.log("mount", this.props.stories, 0, this.state.counter);
+    console.log("mount", this.state.stories, 0, this.state.counter);
     this.props.getDescription(this.props.stories, 0, this.state.counter);
     console.log("mount2", this.props.stories, 0, this.state.counter);
   }
 
   loadMore = () => {
     this.setState({ counter: this.state.counter + 20 });
-    console.log("counter1", this.state.counter);
+    console.log("counter1", this.props.descriptions.length, this.state.counter);
     this.props.getDescription(
       this.props.stories,
-      this.props.description.length,
+      this.props.descriptions.length,
       this.state.counter
     );
-    console.log("counter2", this.state.counter, this.state.description.length);
+    console.log("counter2", this.props.descriptions.length, this.state.counter);
   };
 
   render() {

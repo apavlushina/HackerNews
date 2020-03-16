@@ -36,7 +36,7 @@ export const getDescription = (
 ) => dispatch => {
   console.log("props in action", arrayOfStories);
   for (let i = startCounter; i <= finishCounter; i++) {
-    request(`${baseUrl}item/${arrayOfStories[i]}.json`)
+    request(`${baseUrl}item/${i}.json`)
       .then(response => {
         const action = detailedStories(response.body);
         dispatch(action);
