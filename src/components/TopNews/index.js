@@ -1,17 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 export default function TopNews(props) {
-  const [count, loadMore] = useState(4);
-
   const formatDate = date => {
-    let newDate = [];
-    newDate = [
-      "0" + date.getDate(),
-      "0" + (date.getMonth() + 1),
-      "" + date.getFullYear()
-    ].map(component => component.slice(-2));
+    let time = new Date();
+    let newTime = time.getTime();
+    let difference = newTime - date;
 
-    return newDate.join(".");
+    console.log("difference", difference);
+
+    switch (true) {
+      case difference < 60000:
+        console.log("1 minute");
+        return "1 minute";
+
+      case difference < 3600000:
+        console.log(Math.floor(difference / 60000) + " minutes");
+        return Math.floor(difference / 60000) + " minutes";
+
+      case difference < 7200000:
+        console.log("1 hour");
+        return Math.floor(difference / 60000 / 60) + " hour";
+
+      case difference < 3600000 * 24:
+        console.log(Math.floor(difference / 60000 / 60) + " hours");
+        return Math.floor(difference / 60000 / 60) + " hours";
+
+      case difference < 3600000 * 48:
+        console.log("1 day");
+        return "1 day";
+
+      case difference < 3600000 * 24 * 30:
+        console.log(Math.floor(difference / 60000 / 60 / 24) + " days");
+        return Math.floor(difference / 60000 / 60 / 24) + " days";
+
+      case difference < 3600000 * 24 * 60:
+        console.log("1 month");
+        return "1 month";
+
+      case difference < 3600000 * 24 * 30 * 12:
+        return Math.floor(difference / 60000 / 60 / 24 / 30 / 12) + " months";
+
+      case difference > (3600000 - 1) * 24 * 30 * 12:
+        console.log("  more than a year");
+        return " more than a year";
+    }
   };
+
+  // formatDate(1584363230820);
+  formatDate(1584373295986);
 
   return (
     <div className="list-container">

@@ -15,20 +15,17 @@ export class MainPage extends React.PureComponent {
 
   async componentDidMount() {
     await this.props.getStories();
-    console.log("mount", this.state.stories, 0, this.state.counter);
+    console.log("mount", this.props.stories);
     this.props.getDescription(this.props.stories, 0, this.state.counter);
-    console.log("mount2", this.props.stories, 0, this.state.counter);
   }
 
   loadMore = () => {
     this.setState({ counter: this.state.counter + 20 });
-    console.log("counter1", this.props.descriptions.length, this.state.counter);
     this.props.getDescription(
       this.props.stories,
       this.props.descriptions.length,
       this.state.counter
     );
-    console.log("counter2", this.props.descriptions.length, this.state.counter);
   };
 
   render() {

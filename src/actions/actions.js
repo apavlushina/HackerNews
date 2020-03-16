@@ -1,5 +1,4 @@
 import request from "superagent";
-import stories from "../reducers/stories";
 
 export const ALL_STORIES = "ALL_STORIES";
 
